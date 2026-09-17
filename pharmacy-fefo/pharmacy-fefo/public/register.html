@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sign up — PharmaBatch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div class="auth-wrap">
+  <h1>Create your account</h1>
+  <form id="registerForm">
+    <input type="text" id="name" placeholder="Full name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password (min 6 chars)" required minlength="6" />
+    <div class="error-msg" id="err"></div>
+    <button type="submit" class="btn-primary">Sign up</button>
+  </form>
+  <div class="switch-link">Already have an account? <a href="/login.html">Log in</a></div>
+</div>
+<script>
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const errEl = document.getElementById('err');
+  errEl.textContent = '';
+  try {
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.error || 'Registration failed'; return; }
+    window.location.href = '/dashboard.html';
+  } catch (err) {
+    errEl.textContent = 'Network error, please try again.';
+  }
+});
+</script>
+</body>
+</html>

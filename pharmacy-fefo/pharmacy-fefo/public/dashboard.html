@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Dashboard — PharmaBatch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">💊 PharmaBatch</div>
+  <div>
+    <span id="userName" style="margin-right:16px;color:#64748b;"></span>
+    <button class="btn-secondary" id="logoutBtn">Log out</button>
+  </div>
+</header>
+
+<div class="app-body">
+  <aside class="sidebar">
+    <button data-view="medicines" class="active">📦 Medicines</button>
+    <button data-view="dispense">⏩ Dispense</button>
+    <button data-view="alerts">⚠️ Alerts</button>
+    <button data-view="history">🧾 History</button>
+  </aside>
+
+  <main class="main" id="mainContent">
+    <!-- populated by app.js -->
+  </main>
+</div>
+
+<div id="modalRoot"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
